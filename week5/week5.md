@@ -99,6 +99,8 @@ for i in range(len(vec1)):
     temp[i] = vec1[i] + vec2[i]
 return temp
 ```
+> Enjoyable Task: Can you run these three statements in one single python statement?
+
 Now the function is completely functional, can be called and passed two vectors to be added.
 ```
 v1 = [7, 6, 9]
@@ -240,4 +242,125 @@ The error message is telling the errored list and also which element is causing 
 |----------------------|---------------------------|
 | TypeError: can only concatenate str (not "int") to str | Exception: The list [4, 6, '3'] contains element 3 which is of type <class 'str'>. Whereas it must be either an integer or a floating point value. |
 Notice the difference between two error messages.
-Not only clear error message but there is also a very big issue we resolved here.
+Not only there is a clear error message but there is also a very huge issue we resolved here.
+Consider the following case
+```
+v1 = [random.randint(0, 100) for i in range(100000000)]
+v2 = [random.randint(0, 100) for i in range(99999999)]
+v2.append("3")
+add_2_vectors(v1,v2)
+```
+`v1` contains 100 million random integers while `v2` contains 99 million random integers and on last contains a string `"3"`. So the function starts and will successfuly add 99 million integers.The 100 million position of `v1` contains a random integer but the same position of `v2` contains string `"3"`. And since integer and string cannot be added to one another. The program causes an error.
+
+Time consumed without 2nd Check Point.
+```
+muhammad@debian:~/IntroToPython/week5$ time python3 vector_addition.py 
+Traceback (most recent call last):
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 29, in <module>
+    add_2_vectors(v1,v2)
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 23, in add_2_vectors
+    temp[i] = vec1[i] + vec2[i]
+              ~~~~~~~~^~~~~~~~~
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+
+real    1m22.780s
+user    1m22.137s
+sys     0m0.313s
+```
+Time consumed with 2nd CheckPoint.
+```
+muhammad@debian:~/IntroToPython/week5$ time python3 vector_addition.py 
+Traceback (most recent call last):
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 29, in <module>
+    add_2_vectors(v1,v2)
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 14, in add_2_vectors
+    raise Exception(f"The list contains element {i} which is of type {type(i)}. Whereas it must be either an integer or a floating point value.")
+Exception: The list contains element 3 which is of type <class 'str'>. Whereas it must be either an integer or a floating point value.
+
+real    1m21.641s
+user    1m21.330s
+sys     0m0.229s
+```
+
+Without adding the check point took more time than with checkpoint. Now the difference b/w the two times may not look significant because the time taken to check if element is integer or float by two functions `isinstance(x, int)` and `isinstance(x, float)` and then combining the returned two booleans using `or` operator takes the same time as adding two integers. But the thing is, you will always not be just adding integers. Much more complex operations are performed on vectors and matrices.
+Remove the `isinstance(x, float)` function and the `or` operator and the time reduces to 1m16.801s
+```
+muhammad@debian:~/IntroToPython/week5$ time python3 vector_addition.py 
+Traceback (most recent call last):
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 29, in <module>
+    add_2_vectors(v1,v2)
+  File "/home/muhammad/IntroToPython/week5/vector_addition.py", line 14, in add_2_vectors
+    raise Exception(f"The list contains element {i} which is of type {type(i)}. Whereas it must be either an integer or a floating point value.")
+Exception: The list contains element 3 which is of type <class 'str'>. Whereas it must be either an integer or a floating point value.
+
+real    1m16.801s
+user    1m16.628s
+sys     0m0.167s
+```
+
+### 3rd Check Point
+The last thing is more of Math thing than of computer thing. Because there can be cases where computer doesn't see that as a problem. The point is to check if the two vectors are equal in length or not. Obviously, two vectors with different number of rows cannot be added together in Math (in computer terminology).
+```
+if len(vec1) == len(vec2):
+    pass
+else:
+    raise Exception("Length of both Vectors must be same.")
+```
+This block of code makes sure that both `vec1` and `vec2` have the same length.
+```
+temp = [None for i in range(len(vec1))]
+for i in range(len(vec1)):
+    temp[i] = vec1[i] + vec2[i]
+return temp
+```
+#### Cases where computer doesn't see unequal vectors as a problem
+As can be seen in the code that both `temp` list and the `for` loop depend on the length of `vec1`. So as long as `vec2` is greater than or equal to `vec1`, the code should work just fine. Because if `vec1` is greater, the loop tries to go beyond the limits of `vec2` and that causes an error.
+```
+add_2_vectors([4, 6, 3], [2, 5, 6, 7])
+```
+The above code causes no error. But the result returned is logically/Mathematically wrong.
+$$
+\begin{bmatrix}
+4 \\\\
+6 \\\\
+3 \\\\
+\end{bmatrix}
+\\;
++
+\\;
+\begin{bmatrix}
+2 \\\\
+5 \\\\
+6 \\\\
+7 \\\\
+\end{bmatrix}
+\\;
+\=
+\\;
+\begin{bmatrix}
+6 \\\\
+11 \\\\
+9 \\\\
+\end{bmatrix}
+$$
+Computer will add them as above. But it is a logical mistake. Since there are no errors. The program will generate very unexpected results and debugging those logical errors is terrible.
+
+<div align="center"><u> Practice Questions </u></div>
+
+> Write a function that takes adds, subtracts, multiplies, divides an integer from a vector. Function takes integer, vector and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
+
+> Write a function that takes adds, subtracts, multiplies, divides two vectors. Function takes vectors and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
+
+> Write a function that performs dot product on two vectors and returns the result. Should take two vectors as arguments.
+
+> Write a function that performs cross product on two vectors and returns the result. Should take two vectors as arguments.
+
+> Write a function that performs dot product on two vectors and returns the result. Should take two vectors as arguments.
+
+> Write a function that gives the unit vector of the given vector. Should take vector as argument.
+
+Hint: There are many functions using the same set of code forexample checkpoints. You may write a separate function who's just responsible for checking data.
+
+<div align="center"><u> Advanced Practice Questions </u></div>
+
+Consider the following Axes ![Axes](../assets/axes.svg)
