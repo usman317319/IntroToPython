@@ -1,4 +1,3 @@
-import random
 def add_2_vectors(vec1, vec2):
     for vec in [vec1, vec2]:
         if isinstance(vec, list):
@@ -13,14 +12,12 @@ def add_2_vectors(vec1, vec2):
             else:
                 raise Exception(f"The list contains element {i} which is of type {type(i)}. Whereas it must be either an integer or a floating point value.")
 
-    # if len(vec1) == len(vec2):
-    #     pass
-    # else:
-    #     raise Exception("Length of both Vectors must be same.")
+    if len(vec1) == len(vec2):
+        pass
+    else:
+        raise Exception("Length of both Vectors must be same.")
 
     temp = [None for i in range(len(vec1))]
     for i in range(len(vec1)):
         temp[i] = vec1[i] + vec2[i]
     return temp
-
-add_2_vectors([4, 6, 3], [2, 5, 6, 7])

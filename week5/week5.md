@@ -363,4 +363,44 @@ Hint: There are many functions using the same set of code forexample checkpoints
 
 <div align="center"><u> Advanced Practice Questions </u></div>
 
-Consider the following Axes ![Axes](../assets/axes.svg)
+<div style="display: flex; justify-content: space-between; aligned-items: flex-start;">
+  <div style="width: 50%">
+    <p>Consider the following Axes.
+       $$\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix}
+       \;
+       ,
+       \;
+       \color{#0398fc}{\hat{j}} = \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix}$$
+    </p>
+    <p>
+    Any point on the coordinate system can be reached using Linear Combination of $\color{#fc3d03}{\hat{i}}$ and $\color{#0398fc}{\hat{j}}$ unit vectors.
+    </p>
+  </div>
+  <div style="width: 50%; float: right;">
+    <img src="../assets/axes.svg" alt="Axes" style="width: 200%" />
+  </div>
+</div>
+
+<div style="display: flex; justify-content: space-between; aligned-items: flex-start;">
+  <div style="width: 50%">
+  <p>
+  Forexample the point $\begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$ can be reached by
+  $$2 \color{#fc3d03}{\hat{i}} + 3\color{#fc3d03}{\hat{j}} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
+  $$2 \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix} + 3 \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
+  $$ \begin{bmatrix} 2 \\\\ 0 \\\\ \end{bmatrix} + \begin{bmatrix} 0 \\\\ 3 \\\\ \end{bmatrix} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
+  </p>
+  </div>
+  <div style="width: 50%; float: right;">
+    <img src="../assets/axes_vectors.svg" alt="Axes" style="width: 200%" />
+  </div>
+</div>
+
+Similarly any point on on the xy-coordinate system can be reached by the linear combination of $\color{#fc3d03}{\hat{i}}$ and $\color{#fc3d03}{\hat{j}}$ unit vectors.
+
+> Write a function that
+> - Takes the point to be reached as function argument.
+> - Considers $\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix}$ and $\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix}$ as unit vectors.
+> - Returns the factors multiplied with $\color{#fc3d03}{\hat{i}}$ and $\color{#fc3d03}{\hat{j}}$.
+> - Forexample in the above example those factors where 2 and 3.
+> - Standard form $x \color{#fc3d03}{\hat{i}} + y \color{#fc3d03}{\hat{j}}$.
+> Find x and y.
