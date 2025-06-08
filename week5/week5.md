@@ -343,23 +343,13 @@ $$
 9 \\\\
 \end{bmatrix}
 $$
-Computer will add them as above. But it is a logical mistake. Since there are no errors. The program will generate very unexpected results and debugging those logical errors is terrible.
+Computer will add them as above. But it is a logical mistake. Since there are no errors. The program will generate very unexpected results and debugging those logical errors can be terrible.
 
 <div align="center"><u> Practice Questions </u></div>
 
-> Write a function that takes adds, subtracts, multiplies, divides an integer from a vector. Function takes integer, vector and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
+> Write a function that takes adds, subtracts, multiplies, divides an integer from a vector (`+,-,*,/'ing Scaler with a vector`). Function takes integer, vector and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
 
 > Write a function that takes adds, subtracts, multiplies, divides two vectors. Function takes vectors and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
-
-> Write a function that performs dot product on two vectors and returns the result. Should take two vectors as arguments.
-
-> Write a function that performs cross product on two vectors and returns the result. Should take two vectors as arguments.
-
-> Write a function that performs dot product on two vectors and returns the result. Should take two vectors as arguments.
-
-> Write a function that gives the unit vector of the given vector. Should take vector as argument.
-
-Hint: There are many functions using the same set of code forexample checkpoints. You may write a separate function who's just responsible for checking data.
 
 <div align="center"><u> Advanced Practice Questions </u></div>
 
@@ -385,7 +375,7 @@ Hint: There are many functions using the same set of code forexample checkpoints
   <div style="width: 50%">
   <p>
   Forexample the point $\begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$ can be reached by
-  $$2 \color{#fc3d03}{\hat{i}} + 3\color{#fc3d03}{\hat{j}} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
+  $$2 \color{#fc3d03}{\hat{i}} + 3\color{#0398fc}{\hat{j}} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
   $$2 \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix} + 3 \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
   $$ \begin{bmatrix} 2 \\\\ 0 \\\\ \end{bmatrix} + \begin{bmatrix} 0 \\\\ 3 \\\\ \end{bmatrix} = \begin{bmatrix} 2 \\\\ 3 \\\\ \end{bmatrix}$$
   </p>
@@ -395,12 +385,11 @@ Hint: There are many functions using the same set of code forexample checkpoints
   </div>
 </div>
 
-Similarly any point on on the xy-coordinate system can be reached by the linear combination of $\color{#fc3d03}{\hat{i}}$ and $\color{#fc3d03}{\hat{j}}$ unit vectors.
+Similarly any point on on the xy-coordinate system can be reached by the linear combination of $\color{#fc3d03}{\hat{i}}$ and $\color{#0398fc}{\hat{j}}$ unit vectors.
 
 > Write a function that
 > - Takes the point to be reached as function argument.
-> - Considers $\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix}$ and $\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix}$ as unit vectors.
-> - Returns the factors multiplied with $\color{#fc3d03}{\hat{i}}$ and $\color{#fc3d03}{\hat{j}}$.
-> - Forexample in the above example those factors where 2 and 3.
-> - Standard form $x \color{#fc3d03}{\hat{i}} + y \color{#fc3d03}{\hat{j}}$.
+> - Considers $\color{#fc3d03}{\hat{i}} = \begin{bmatrix} 1 \\\\ 0 \\\\ \end{bmatrix}$ and $\color{#0398fc}{\hat{j}} = \begin{bmatrix} 0 \\\\ 1 \\\\ \end{bmatrix}$ as unit vectors.
+> - Returns the factors multiplied with $\color{#fc3d03}{\hat{i}}$ and $\color{#0398fc}{\hat{j}}$ (in the above example those factors were 2 and 3).
+> - Standard form: $x \color{#fc3d03}{\hat{i}} + y \color{#0398fc}{\hat{j}}$.
 > Find x and y.
