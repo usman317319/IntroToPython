@@ -116,6 +116,7 @@ return [[i + j for i,j in zip(mat1[k], mat2[k])] for k in range(len(mat1))]
 ```
 
 <div align="center"><u> Practice Questions </u></div>
+
 > Write a function that takes adds, subtracts, multiplies, divides an integer from a matrix (`+,-,*,/'ing Scaler with a matrix`). Function takes integer, matrix and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
 
 > Write a function that takes adds, subtracts, multiplies, divides two matrices. Function takes matrices and operation (as string `"+"`, `"-"`, `"*"`, "/") as arguments and returns the result.
@@ -125,17 +126,55 @@ return [[i + j for i,j in zip(mat1[k], mat2[k])] for k in range(len(mat1))]
 ## Matrix Multiplication Algorithm
 There is one memorable formula given to perform matrix multiplication.
 
-<div id="a"></div>
-<div id="b"></div>
 <div id="output"></div>
 
 <script>
-    const labels = ['a', 'b'];
+  let content = '$$';
+  const labels = ['a', 'b'];
 
-    for (let i = 0; i < labels.length; i++) {
-        document.getElementById(labels[i]).innerHTML = `$$\\begin{bmatrix}
-                                                ${l}_1 & ${l}_2 \\\\
-                                                ${l}_3 & ${l}_4
-                                                \\end{bmatrix}$$`
-    }
+  for (let i = 0; i < labels.length; i++) {
+    const l = labels[i];
+    content += `\\begin{bmatrix}
+                ${l}_1 & ${l}_2 \\\\
+                ${l}_3 & ${l}_4
+                \\end{bmatrix}`;
+  }
+  content += '=';
+  content += `\\begin{bmatrix}
+              a_1 B_1 + a_2 b_3 & a_1 B_2 + a_2 b_4 \\\\
+              a_3 B_1 + a_4 b_3 & a_3 B_2 + a_4 b_4
+              \\end{bmatrix}`;
+  content += '$$';
+
+  document.getElementById('output').innerHTML = content;
+
+  MathJax.typeset();
 </script>
+This algorithm can be programmed. But let's do matrix multiplication in a completely different manner i.e. `Matrix Multiplication` as `Linear Combination`.
+
+$$A = \\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} and\ \  B = \\begin{bmatrix} 1 & 3 \\\\ 2 & 4 \\end{bmatrix}$$
+
+Multiplying:
+$$AB$$
+$$\\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} \\begin{bmatrix} 1 & 3 \\\\ 2 & 4 \\end{bmatrix}$$
+
+Consider the two columns of Matrix B as vectors i.e.
+$$ b_1 = \\begin{bmatrix}1 \\\\ 2\\end{bmatrix}, b_2 = \\begin{bmatrix}3 \\\\ 4\\end{bmatrix}$$
+
+Multiply A with $B_1$
+$$\\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} B_1$$
+$$\\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}$$
+Think of this as a linear combination of columns of A where elements of $b_1$ represent values multiplication factors i.e.:
+$$1 \\begin{bmatrix} 3 \\\\ 1 \\end{bmatrix} + 2  \\begin{bmatrix} 4 \\\\ 2 \\end{bmatrix} = \\begin{bmatrix} 3 \\\\ 1 \\end{bmatrix} + \\begin{bmatrix} 8 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} 11 \\\\ 5 \\end{bmatrix}$$
+
+Multiply A with $B_2$
+$$\\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} B_2$$
+$$\\begin{bmatrix} 3 & 4 \\\\ 1 & 2 \\end{bmatrix} \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$$
+Think of this as a linear combination of columns of A where elements of $b_2$ represent values multiplication factors i.e.:
+$$3 \\begin{bmatrix} 3 \\\\ 1 \\end{bmatrix} + 4  \\begin{bmatrix} 4 \\\\ 2 \\end{bmatrix} = \\begin{bmatrix} 9 \\\\ 3 \\end{bmatrix} + \\begin{bmatrix} 16 \\\\ 8 \\end{bmatrix} = \\begin{bmatrix} 25 \\\\ 11 \\end{bmatrix}$$
+
+The resulting matrix (of multiplication) contains 1st column as the vector extracted by multiplying A with $b_1$ and 2nd column as vector extracted by multiplying A with $b_2$:
+$$\\begin{bmatrix} 11 & 25 \\\\ 5 & 11 \\end{bmatrix}$$
+
+This process may seem tedious not only from Mathematical point of view but also from programming point of view. Why going through all of this trouble when we simply had the matrix multiplication formula. Unfortunately, this document is not supposed to get into too much Math details so I consider skipping that and try to cover the programming details.
+Instead of writing new code for matrix multiplication, try to reuse code (functions) from previous chapter (vectors). We have already written code/function for linear combination of vectors. Here I tried to do Matrix Multiplication manually so much that we simplify the problem to linear combination and after that just to multiply a scalar with a vector. Instead of writing new code for matrix multiplication, try to reuse some code.
